@@ -36,8 +36,6 @@
             this.murtxt = new System.Windows.Forms.TextBox();
             this.cattxt = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Tipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direccion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,6 +44,8 @@
             this.Latitud = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Telefono = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Descripcion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.snombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,6 +67,8 @@
             this.slocalidad = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.scomunidad = new System.Windows.Forms.TextBox();
+            this.urltxt = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -150,25 +152,6 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Archivos a insertar";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 169);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Resultado de la búsqueda";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // Nombre
             // 
             this.Nombre.Text = "Nombre";
@@ -205,6 +188,25 @@
             // 
             this.Descripcion.Text = "Descripcion";
             this.Descripcion.Width = 78;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Archivos a insertar";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 169);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(131, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Resultado de la búsqueda";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button2
             // 
@@ -379,11 +381,29 @@
             this.scomunidad.Size = new System.Drawing.Size(100, 20);
             this.scomunidad.TabIndex = 30;
             // 
+            // urltxt
+            // 
+            this.urltxt.Location = new System.Drawing.Point(17, 4);
+            this.urltxt.Name = "urltxt";
+            this.urltxt.Size = new System.Drawing.Size(100, 20);
+            this.urltxt.TabIndex = 32;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(124, 10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 13);
+            this.label13.TabIndex = 33;
+            this.label13.Text = "URL";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 445);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.urltxt);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.scomunidad);
             this.Controls.Add(this.label11);
@@ -465,6 +485,8 @@
         private System.Windows.Forms.TextBox slocalidad;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox scomunidad;
+        private System.Windows.Forms.TextBox urltxt;
+        private System.Windows.Forms.Label label13;
     }
 }
 

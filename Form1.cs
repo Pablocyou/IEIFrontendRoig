@@ -65,7 +65,7 @@ namespace IEIFrontendRoig
             if (slongitud.Text == "") { lon = "69.420"; }
             if (slatitud.Text == "") { lat = "69.420"; }
 
-            var response = await HttpGetAsync("http://localhost:8080/lookupCentro?nombre=" + snombre.Text +
+            var response = await HttpGetAsync("http://"+ urltxt.Text+"/lookupCentro?nombre=" + snombre.Text +
                     "&tipo=" + stipo.Text +
                     "&direccion=" + sdireccion.Text +
                     "&codigoPostal=" + cp +
@@ -91,6 +91,7 @@ namespace IEIFrontendRoig
 
                 listView1.Items.Add(lvi);
             }
+            MessageBox.Show("Procedimiento acabado", "Resultado");
         }
 
 
@@ -113,43 +114,43 @@ namespace IEIFrontendRoig
         {
             if (checkBox1.Checked && checkBox2.Checked && checkBox3.Checked)//all
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkALL?filenameMUR=" + murtxt.Text +
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkALL?filenameMUR=" + murtxt.Text +
                     "&filenameCV=" + cvtxt.Text +
                     "&filenameCAT=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox1.Checked && checkBox2.Checked)//cv + mur
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkMUR_CV?filenameMUR=" + murtxt.Text +
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkMUR_CV?filenameMUR=" + murtxt.Text +
                     "&filenameCV=" + cvtxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox2.Checked && checkBox3.Checked)//mur + cat
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkMUR_CAT?filenameMUR=" + murtxt.Text +
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkMUR_CAT?filenameMUR=" + murtxt.Text +
                     "&filenameCAT=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox1.Checked && checkBox3.Checked)//cv + cat
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkCV_CAT?" +
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkCV_CAT?" +
                     "filenameCV=" + cvtxt.Text +
                     "&filenameCAT=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox1.Checked)//cv
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkCV?filename=" + cvtxt.Text);
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkCV?filename=" + cvtxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox2.Checked)//mur
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkMUR?filename=" + murtxt.Text);
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkMUR?filename=" + murtxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox3.Checked)//cat
             {
-                var response = await HttpGetAsync("http://localhost:8080/dunkCAT?filename=" + cattxt.Text);
+                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkCAT?filename=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
         }
