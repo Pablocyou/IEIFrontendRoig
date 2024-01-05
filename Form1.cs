@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace IEIFrontendRoig
@@ -20,6 +24,10 @@ namespace IEIFrontendRoig
             InitializeComponent();
         }
 
+        //Capa de marcadores
+        GMapOverlay markersOverlay = new GMapOverlay("markers");
+
+
         #region unused
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
@@ -30,6 +38,7 @@ namespace IEIFrontendRoig
         {
 
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -56,6 +65,7 @@ namespace IEIFrontendRoig
         private async void button1_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
+            markersOverlay.Clear();
             List<Centro> l = new List<Centro>();
             String cp = scp.Text;
             String lon = slongitud.Text;
@@ -65,7 +75,7 @@ namespace IEIFrontendRoig
             if (slongitud.Text == "") { lon = "69.420"; }
             if (slatitud.Text == "") { lat = "69.420"; }
 
-            var response = await HttpGetAsync("http://"+ urltxt.Text+"/lookupCentro?nombre=" + snombre.Text +
+            var response = await HttpGetAsync("http://" + urltxt.Text + "/lookupCentro?nombre=" + snombre.Text +
                     "&tipo=" + stipo.Text +
                     "&direccion=" + sdireccion.Text +
                     "&codigoPostal=" + cp +
@@ -77,7 +87,8 @@ namespace IEIFrontendRoig
                     "&comunidad=" + scomunidad.Text);
             l = JsonConvert.DeserializeObject<List<Centro>>(response);
 
-            foreach (Centro i in l) {
+            foreach (Centro i in l)
+            {
                 ListViewItem lvi = new ListViewItem(i.nombre);
                 lvi.SubItems.Add(i.tipo);
                 lvi.SubItems.Add(i.direccion);
@@ -89,8 +100,10 @@ namespace IEIFrontendRoig
                 lvi.SubItems.Add(i.localidad + "");
                 lvi.SubItems.Add(com);
 
+                addMark(i.longitud, i.latitud);
                 listView1.Items.Add(lvi);
             }
+
             MessageBox.Show("Procedimiento acabado", "Resultado");
         }
 
@@ -114,46 +127,81 @@ namespace IEIFrontendRoig
         {
             if (checkBox1.Checked && checkBox2.Checked && checkBox3.Checked)//all
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkALL?filenameMUR=" + murtxt.Text +
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkALL?filenameMUR=" + murtxt.Text +
                     "&filenameCV=" + cvtxt.Text +
                     "&filenameCAT=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox1.Checked && checkBox2.Checked)//cv + mur
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkMUR_CV?filenameMUR=" + murtxt.Text +
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkMUR_CV?filenameMUR=" + murtxt.Text +
                     "&filenameCV=" + cvtxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox2.Checked && checkBox3.Checked)//mur + cat
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkMUR_CAT?filenameMUR=" + murtxt.Text +
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkMUR_CAT?filenameMUR=" + murtxt.Text +
                     "&filenameCAT=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox1.Checked && checkBox3.Checked)//cv + cat
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkCV_CAT?" +
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkCV_CAT?" +
                     "filenameCV=" + cvtxt.Text +
                     "&filenameCAT=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox1.Checked)//cv
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkCV?filename=" + cvtxt.Text);
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkCV?filename=" + cvtxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox2.Checked)//mur
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkMUR?filename=" + murtxt.Text);
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkMUR?filename=" + murtxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
             else if (checkBox3.Checked)//cat
             {
-                var response = await HttpGetAsync("http://"+ urltxt.Text+"/dunkCAT?filename=" + cattxt.Text);
+                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkCAT?filename=" + cattxt.Text);
                 MessageBox.Show(response, "Resultado");
             }
         }
 
+        private void gMapControl1_Load(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            gMapControl1.Position = new PointLatLng(39.73530153247731, 0.3365800521561152); //ZONA INICIAL DEL MAPA
+
+            gMapControl1.CanDragMap = true;
+            gMapControl1.MouseWheelZoomType = MouseWheelZoomType.MousePositionWithoutCenter;
+
+            gMapControl1.ShowCenter = false;
+            gMapControl1.MinZoom = 5;
+            gMapControl1.MaxZoom = 17;
+            gMapControl1.Zoom = 6;
+
+
+
+        }
+
+        private void addMark(double lon, double lat)
+        {
+            //Crea el marcador
+            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(lon, lat), GMarkerGoogleType.red);
+            //Lo añade a la capa de marcadores
+            markersOverlay.Markers.Add(marker);
+            //Añade la capa al mapa
+            gMapControl1.Overlays.Add(markersOverlay);
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            double lon = Convert.ToDouble(listView1.SelectedItems[0].SubItems[4].Text);
+            double lat = Convert.ToDouble(listView1.SelectedItems[0].SubItems[5].Text);
+
+            markersOverlay.Clear();
+            addMark(lon, lat);
+        }
     }
 }
