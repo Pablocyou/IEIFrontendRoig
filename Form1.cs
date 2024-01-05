@@ -8,6 +8,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using System.Text;
 
 namespace IEIFrontendRoig
 {
@@ -88,50 +89,33 @@ namespace IEIFrontendRoig
             return content;
         }
 
-        
+        //Método POST HTTP Async
+        public async static Task<string> HttpPostAsync(string uri, Dictionary<string, string> values)
+        {
+            string content = null;
+            var jsonData = JsonConvert.SerializeObject(values);
+            var requestContent2 = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var client = new HttpClient();
+            var response = await client.PostAsync(uri, requestContent2);
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+            return content;
+        }
+
+
         private async void Insertar(object sender, EventArgs e)
         {
-            if (checkBox1.Checked && checkBox2.Checked && checkBox3.Checked)//todos
+
+            var data = new Dictionary<string, string>
             {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkALL?filenameMUR=" + murtxt.Text +
-                    "&filenameCV=" + cvtxt.Text +
-                    "&filenameCAT=" + cattxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
-            else if (checkBox1.Checked && checkBox2.Checked)//cv + mur
-            {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkMUR_CV?filenameMUR=" + murtxt.Text +
-                    "&filenameCV=" + cvtxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
-            else if (checkBox2.Checked && checkBox3.Checked)//mur + cat
-            {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkMUR_CAT?filenameMUR=" + murtxt.Text +
-                    "&filenameCAT=" + cattxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
-            else if (checkBox1.Checked && checkBox3.Checked)//cv + cat
-            {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkCV_CAT?" +
-                    "filenameCV=" + cvtxt.Text +
-                    "&filenameCAT=" + cattxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
-            else if (checkBox1.Checked)//cv
-            {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkCV?filename=" + cvtxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
-            else if (checkBox2.Checked)//mur
-            {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkMUR?filename=" + murtxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
-            else if (checkBox3.Checked)//cat
-            {
-                var response = await HttpGetAsync("http://" + urltxt.Text + "/dunkCAT?filename=" + cattxt.Text);
-                MessageBox.Show(response, "Resultado");
-            }
+            {"filenameMUR", murtxt.Text},
+            {"filenameCAT", cattxt.Text },
+            {"filenameCV", cvtxt.Text }
+            };
+            var response = await HttpPostAsync("http://" + urltxt.Text + "/dunk", data);
+            MessageBox.Show(response, "Resultado");
         }
 
         private void InicializarMapa() {
