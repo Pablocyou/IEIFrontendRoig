@@ -80,7 +80,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Buscar);
             // 
             // checkBox1
             // 
@@ -152,6 +152,7 @@
             this.listView1.TabIndex = 7;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.SeleccionarCentro);
             // 
             // Nombre
             // 
@@ -207,7 +208,6 @@
             this.label2.Size = new System.Drawing.Size(131, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Resultado de la búsqueda";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button2
             // 
@@ -217,7 +217,7 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "Insertar";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Insertar);
             // 
             // snombre
             // 
@@ -225,7 +225,6 @@
             this.snombre.Name = "snombre";
             this.snombre.Size = new System.Drawing.Size(100, 20);
             this.snombre.TabIndex = 11;
-            this.snombre.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -292,7 +291,6 @@
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 21;
             this.label7.Text = "longitud";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // slongitud
             // 
@@ -300,7 +298,6 @@
             this.slongitud.Name = "slongitud";
             this.slongitud.Size = new System.Drawing.Size(100, 20);
             this.slongitud.TabIndex = 20;
-            this.slongitud.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label8
             // 
@@ -466,7 +463,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
