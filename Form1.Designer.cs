@@ -32,9 +32,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.cvtxt = new System.Windows.Forms.TextBox();
-            this.murtxt = new System.Windows.Forms.TextBox();
-            this.cattxt = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Tipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -67,8 +64,6 @@
             this.slocalidad = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.scomunidad = new System.Windows.Forms.TextBox();
-            this.urltxt = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.SuspendLayout();
             // 
@@ -111,27 +106,6 @@
             this.checkBox3.TabIndex = 3;
             this.checkBox3.Text = "CAT";
             this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // cvtxt
-            // 
-            this.cvtxt.Location = new System.Drawing.Point(100, 43);
-            this.cvtxt.Name = "cvtxt";
-            this.cvtxt.Size = new System.Drawing.Size(100, 20);
-            this.cvtxt.TabIndex = 4;
-            // 
-            // murtxt
-            // 
-            this.murtxt.Location = new System.Drawing.Point(100, 70);
-            this.murtxt.Name = "murtxt";
-            this.murtxt.Size = new System.Drawing.Size(100, 20);
-            this.murtxt.TabIndex = 5;
-            // 
-            // cattxt
-            // 
-            this.cattxt.Location = new System.Drawing.Point(100, 97);
-            this.cattxt.Name = "cattxt";
-            this.cattxt.Size = new System.Drawing.Size(100, 20);
-            this.cattxt.TabIndex = 6;
             // 
             // listView1
             // 
@@ -379,22 +353,6 @@
             this.scomunidad.Size = new System.Drawing.Size(100, 20);
             this.scomunidad.TabIndex = 30;
             // 
-            // urltxt
-            // 
-            this.urltxt.Location = new System.Drawing.Point(17, 4);
-            this.urltxt.Name = "urltxt";
-            this.urltxt.Size = new System.Drawing.Size(100, 20);
-            this.urltxt.TabIndex = 32;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(124, 10);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 13);
-            this.label13.TabIndex = 33;
-            this.label13.Text = "URL";
-            // 
             // gMapControl1
             // 
             this.gMapControl1.Bearing = 0F;
@@ -427,8 +385,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 445);
             this.Controls.Add(this.gMapControl1);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.urltxt);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.scomunidad);
             this.Controls.Add(this.label11);
@@ -453,9 +409,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.cattxt);
-            this.Controls.Add(this.murtxt);
-            this.Controls.Add(this.cvtxt);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -474,9 +427,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.TextBox cvtxt;
-        private System.Windows.Forms.TextBox murtxt;
-        private System.Windows.Forms.TextBox cattxt;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -509,8 +459,6 @@
         private System.Windows.Forms.TextBox slocalidad;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox scomunidad;
-        private System.Windows.Forms.TextBox urltxt;
-        private System.Windows.Forms.Label label13;
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
     }
 }
