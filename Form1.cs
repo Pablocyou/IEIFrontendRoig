@@ -41,7 +41,7 @@ namespace IEIFrontendRoig
             if (slongitud.Text == "") { lon = "69.420"; }
             if (slatitud.Text == "") { lat = "69.420"; }
 
-            var response = await HttpGetAsync("http://" + urltxt.Text + "/lookupCentro?nombre=" + snombre.Text +
+            var response = await HttpGetAsync("http://localhost:8080/lookupCentro?nombre=" + snombre.Text +
                     "&tipo=" + stipo.Text +
                     "&direccion=" + sdireccion.Text +
                     "&codigoPostal=" + cp +
@@ -107,14 +107,19 @@ namespace IEIFrontendRoig
 
         private async void Insertar(object sender, EventArgs e)
         {
+            String murtxt = "", cattxt = "", cvtxt = "";
+
+            if (checkBox1.Checked) cvtxt = "CV.csv";
+            if (checkBox2.Checked) murtxt = "MUR.json";
+            if (checkBox3.Checked) cattxt = "CAT.xml";
 
             var data = new Dictionary<string, string>
             {
-            {"filenameMUR", murtxt.Text},
-            {"filenameCAT", cattxt.Text },
-            {"filenameCV", cvtxt.Text }
+            {"filenameMUR", murtxt},
+            {"filenameCAT", cattxt },
+            {"filenameCV", cvtxt }
             };
-            var response = await HttpPostAsync("http://" + urltxt.Text + "/dunk", data);
+            var response = await HttpPostAsync("http://localhost:8080/dunk", data);
             MessageBox.Show(response, "Resultado");
         }
 
